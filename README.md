@@ -18,4 +18,5 @@ INPUTS: list of basecall_guppy/pass/*.fastq.gz files
 OUTPUTS: *.kraken.report with summary information, and *.unclassified_kraken_out.fq with non-contaminant reads with fastq format, as well as .out file and *.classified_kraken_out.fq  
 _also see_ kraken2_analysis_on_sequence.sh for running krarken2_analysis on fasta sequence
 
-## Assemble reads
+## Assemble reads  
+INPUTS: *.unclassified_kraken_out.fq  
