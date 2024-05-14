@@ -29,13 +29,15 @@ module load kraken2
 
 export DBNAME="/uoa/home/r01ms21/sharedscratch/Test_2/kraken2/kraken2/DB_standard_kraken2"
 export prefix="390"
+export outdir="390_analysis"
 
-### 
+###
 
 kraken2 --db $DBNAME --threads 10 $(cat 390_input_fq.txt)\
-        --unclassified-out $prefix.unclassified_kraken_out.fq --classified-out $prefix.classified_kraken_out.fq \
-        --output $prefix.kraken_out.out --report $prefix.kraken.report \
+        --unclassified-out $outdir/$prefix.unclassified_kraken_out.fq --classified-out $outdir/$prefix.classified_kraken_out.fq \
+        --output $outdir/$prefix.kraken_out.out --report $outdir/$prefix.kraken.report \
         --gzip-compressed
+
 
 
 ######
