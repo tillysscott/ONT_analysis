@@ -17,9 +17,9 @@ _Script is SplitLibrary.sh_
 ## Step 4 - Mask TE and calculate % sequence from repeats
 There are two ways to do this. If your data set is small (~1Mb) then you can run all the masking steps in one script, however, if your assembly is big then I would do it as a batch of scripts with them being set off as a dependency of the previous one. This means that if a script runs out of time or memory you can easily sort and restart it.  
 - Small assembly use _TE_Prediction.sh_
-- Large assembly see _10_submission_process.txt_ to submit the jobs and use _3_simple_repeats.sh : 9_parseRM.sh_
+- Large assembly see _10_submission_process.txt_ to submit the jobs and use _3_simple_repeats.sh : 9_parseRM.sh_  
 To calculate the total repeat content you can use _8_ProcessRepeats.sh_ which is quick and can be automated, therefore I have used it in _TE_prediction.sh_ but no where in the literature/online does it say how it does it's maths.
-I prefer to use _9_parseRM.sh_ to calculate the total % of sequence from repeats because there is clear literature and better classification layout. I also generates the data needed to make a RepeatLandscape
+I prefer to use _9_parseRM.sh_ to calculate the total % of sequence from repeats because there is clear literature and better classification layout. I also generates the data needed to make a RepeatLandscape. Results are in ``` 07_ParseRM_landscape/$genome.full_mask.align.parseRM.summary.tab- ```. It does require a few manual steps to set off.
 
 ## Step 5 - Make RepeatLandscape
 You need to have run ParseRM previously.
@@ -28,4 +28,8 @@ You need to have run ParseRM previously.
 3. RepeatMasker doesn't count Mavericks or Cryptons as their own order even though they are. They get included in the DNA order (which should be called TIR). So you'll need to add these to your Sheet 2 table and do maths (see 4.). Search for 'Maverick' or 'Crypton' in ``` 07_ParseRM_landscape/$genome.full_mask.align.landscape.Div.Rfam.tab ```. Note that there may be more than one Type of Maverick and that Cryptons are vary rare so there may not be any rows for this. Add these to your initial Sheet 2 table.
 4. Do maths to sort out your DNA/TIR row. Do =DNA-Maverick-Crypton
 5. Copy and paste the rows into the correct row in Sheet 1, cell E4 onwards
-6. Run macros TransposeRow1 : DeleteOriginalTable for the sheet. Got to 'Developer' tab, press 'Macros', single click onto TrasposeRow1
+6. Run macros TransposeRow1 : DeleteOriginalTable for the sheet. Got to 'Developer' tab, press 'Macros', single click onto TrasposeRow1, press run. Repeat for TransposeRow2 up, then use DeleteOriginalTable.
+7. Delete Sheet 2
+8. Save as csv  
+  
+Use R script to plot the RepeatLandscape
