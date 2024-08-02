@@ -18,8 +18,9 @@ _Script is SplitLibrary.sh_
 There are two ways to do this. If your data set is small (~1Mb) then you can run all the masking steps in one script, however, if your assembly is big then I would do it as a batch of scripts with them being set off as a dependency of the previous one. This means that if a script runs out of time or memory you can easily sort and restart it.  
 - Small assembly use _TE_Prediction.sh_
 - Large assembly see _10_submission_process.txt_ to submit the jobs and use _3_simple_repeats.sh : 9_parseRM.sh_  
+  
 To calculate the total repeat content you can use _8_ProcessRepeats.sh_ which is quick and can be automated, therefore I have used it in _TE_prediction.sh_ but no where in the literature/online does it say how it does it's maths.
-I prefer to use _9_parseRM.sh_ to calculate the total % of sequence from repeats because there is clear literature and better classification layout. I also generates the data needed to make a RepeatLandscape. Results are in ``` 07_ParseRM_landscape/$genome.full_mask.align.parseRM.summary.tab- ```. It does require a few manual steps to set off.
+I prefer to use _9_parseRM.sh_ to calculate the total % of sequence from repeats because there is clear literature and better classification layout. I also generates the data needed to make a RepeatLandscape. Results are in ``` 07_ParseRM_landscape/$genome.full_mask.align.parseRM.summary.tab ```. It does require a few manual steps to set off.
 
 ## Step 5 - Make RepeatLandscape
 You need to have run ParseRM previously.
