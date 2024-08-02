@@ -1,19 +1,29 @@
+#!/bin/bash
 
+####
+# set up environment
+## Source miniconda3 installation and activate environment
+source /opt/software/uoa/apps/miniconda3/latest/etc/profile.d/conda.sh
+conda activate seqkit
 
 ## set up
 export library="species1_species2.prefix.consensus"
 
 ## Split the library
-cat ${species}-families.prefix.fa | seqkit fx2tab | grep -v "Unknown" | seqkit tab2fx > ${species}-families.prefix.fa.known
-echo Known library generated: ${species}-families.prefix.fa.known
+cat ${library}.fa | seqkit fx2tab | grep -v "Unknown" | seqkit tab2fx > ${library}.known.fa
+echo Known library generated: ${library}.known.fa
 
-cat ${species}-families.prefix.fa | seqkit fx2tab | grep "Unknown" | seqkit tab2fx > ${species}-families.prefix.fa.unknown
-echo Unknown library generated: ${species}-families.prefix.fa.unknown
+cat ${library}.fa | seqkit fx2tab | grep "Unknown" | seqkit tab2fx > ${library}.unknown.fa
+echo Unknown library generated: ${library}.unknown.fa
 
-
-# quantify number of classified elements
-echo Number of classified elements
-grep -c ">" ${species}-families.prefix.fa.known
-# quantify number of unknown elements
-echo Number of unknown elements
-grep -c ">" ${species}-families.prefix.fa.unknown
+####
+#Check division worked ok
+# quantify number of classified TE families
+echo Number of classified TE families
+grep -c ">" ${library}.known.fa
+# quantify number of unknown TE families
+echo Number of unknown TE families
+grep -c ">" ${library}.unknown.fa
+# quantify original number of TE families
+echo original number of TE families
+grep -c ">" ${library}.fa
