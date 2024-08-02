@@ -1,5 +1,6 @@
 # TE annotation
 This is a collection of scripts to generate a TE library and mask TE  
+You will need seqkit, TwoBit and ParseRM installed locally  
 
 ## Step 1 - Generate a TE library
 Use RepeatModeler2 with the LTRStruct pipeline to generate a de novo TE library for that species  
