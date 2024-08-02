@@ -24,4 +24,7 @@ Assembly can be done de novo with flye or with _Hirondellea gigas_ PacBio refere
 1. minimap2 to assemble with reference genome: minimap2.sh
 2. flye to assemble de novo: flye.sh
 
-OUTPUTS: assembly in fasta format (.fa)
+OUTPUTS: assembly in fasta format (.fa)  
+
+## Predict and mask TE
+See TE_annotation/README.md
