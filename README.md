@@ -21,10 +21,13 @@ _also see_ kraken2_analysis_on_sequence.sh for running krarken2_analysis on fast
 ## Assemble reads  
 INPUTS: ``` *.unclassified_kraken_out.fq ```  
 Assembly can be done de novo with flye or with _Hirondellea gigas_ PacBio reference with minimap2  
-1. minimap2 to map reads to H. gigas reference genome: minimap2.sh
-2. flye to assemble de novo: flye.sh
-
+1. redbean.sh seems to be the best option
+2. minimap2 to map reads to H. gigas reference genome: minimap2.sh
+3. flye to assemble de novo: flye.sh
+  
 OUTPUTS: assembly in fasta format (.fa)  
+  
+## Reduce assembly to haploid with purge_dups
 
 ## Predict and mask TE
 See TE_annotation/README.md
