@@ -1,5 +1,5 @@
 # TE annotation
-This is a collection of scripts to generate a TE library and mask TE  
+This is a collection of scripts to generate a TE library, mask TE and do some analysis  
 You will need seqkit, TwoBit and ParseRM installed locally  
 
 ## Step 1 - Generate a TE library
