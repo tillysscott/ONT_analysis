@@ -33,7 +33,7 @@ Correct TE classification is: Class 1 = LINE, SINE and LTR and Class 2 = TIR, He
 
 ## Step 6 - Make RepeatLandscape
 You need to have run ParseRM previously.  
-1. Copy the from table from ``` 07_ParseRM_landscape/$genome.full_mask.align.landscape.Div.Rclass.tab ``` into _parseRMbins_template.xlsm Sheet 2
+1. Copy the from table from ``` 07_ParseRM_landscape/$genome.full_mask.align.landscape.Div.Rclass.tab ``` into _parseRMbins_template.xlsm_ Sheet 2
 2. Sometimes the labelling goes skewif, if needed add together any rows that are the same TE type. e.g. LINE+LINE/L1 keeping all columns. Helitrons are also called RC (rolling-circles).
 3. RepeatMasker doesn't count Mavericks or Cryptons as their own order even though they are. They get included in the DNA order (which should be called TIR). So you'll need to add these to your Sheet 2 table and do maths (see 4.). Search for 'Maverick' or 'Crypton' in ``` 07_ParseRM_landscape/$genome.full_mask.align.landscape.Div.Rfam.tab ```. Note that there may be more than one Type of Maverick and that Cryptons are vary rare so there may not be any rows for this. Add these to your initial Sheet 2 table.
 4. Do maths to sort out your DNA/TIR row. Do =DNA-Maverick-Crypton
