@@ -5,17 +5,6 @@ PATH=$PATH:~/sharedscratch/apps/TwoBit/
 #change species name in scripts
 #copy TE library into directory
 
-### Generate TE library of all amphipod species ----
-#Add species ID to header line and megre libraries
-SUBMIT:
-jobid1=$(sbatch --parsable 1_cat_commands.sh) 
-
-# Classify more TE in 'unknown' library, using 'known' library
-DO: 2-A_setup.txt
-RUN: jobid2B=$(sbatch --parsable 2-B_repclassify.sh)
-GRAPH the output in excel
-If more runs needed: RUN: jobid2C=$(sbatch --parsable 2-C_repclassify.sh)
-RUN: jobid2Z=$(sbatch --parsable 2-Z_repclassify.sh)
 
 ### Annotate TE ----
 COPY AND PASTE INTO COMMAND LINE:
@@ -29,17 +18,17 @@ jobid6=$(sbatch --parsable --dependency afterok:$jobid5 6_unknown_denovo.sh)
 
 jobid7=$(sbatch --parsable --dependency afterok:$jobid6 7_rename4_cat1.sh)
 
-jobid8A=$(sbatch --parsable --dependency afterok:$jobid7 8A_ProcessRepeats.sh)
-jobid8B=$(sbatch --parsable --dependency afterok:$jobid7 8B_man_tab_calc.sh)
+jobid8A=$(sbatch --parsable --dependency afterok:$jobid7 8_ProcessRepeats.sh)
+#jobid8B=$(sbatch --parsable --dependency afterok:$jobid7 8B_man_tab_calc.sh)
 
-jobid9=$(sbatch --parsable --dependency afterok:$jobid7 999999999A_RepeatLandscape.sh)
-
+# MANUALLY Run 9_parseRM.sh
+COPY AND PASTE INTO COMMAND LINE:
 echo "3_simple_repeats $jobid3 
 4_homology $jobid4 
 5_known_denovo $jobid5 
 6_unknown_denovo $jobid6 
 7_rename4_cat1 $jobid7 
-8A_ProcessRepeats $jobid8A 8B_man_tab_calc $jobid8B 
+8_ProcessRepeats $jobid8A
 9_RepeatLandscape $jobid9" > jobid.txt
 
 #AFTER 8B follow 8C commands ## Optional, old
