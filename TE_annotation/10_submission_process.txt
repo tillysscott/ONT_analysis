@@ -1,0 +1,65 @@
+
+### Set up ----
+conda activate seqkit
+PATH=$PATH:~/sharedscratch/apps/TwoBit/
+#change species name in scripts
+#copy TE library into directory
+
+### Generate TE library of all amphipod species ----
+#Add species ID to header line and megre libraries
+SUBMIT:
+jobid1=$(sbatch --parsable 1_cat_commands.sh) 
+
+# Classify more TE in 'unknown' library, using 'known' library
+DO: 2-A_setup.txt
+RUN: jobid2B=$(sbatch --parsable 2-B_repclassify.sh)
+GRAPH the output in excel
+If more runs needed: RUN: jobid2C=$(sbatch --parsable 2-C_repclassify.sh)
+RUN: jobid2Z=$(sbatch --parsable 2-Z_repclassify.sh)
+
+### Annotate TE ----
+COPY AND PASTE INTO COMMAND LINE:
+jobid3=$(sbatch --parsable 3_simple_repeats.sh)
+
+jobid4=$(sbatch --parsable --dependency afterok:$jobid3 4_homology.sh)
+
+jobid5=$(sbatch --parsable --dependency afterok:$jobid4 5_known_denovo.sh)
+
+jobid6=$(sbatch --parsable --dependency afterok:$jobid5 6_unknown_denovo.sh)
+
+jobid7=$(sbatch --parsable --dependency afterok:$jobid6 7_rename4_cat1.sh)
+
+jobid8A=$(sbatch --parsable --dependency afterok:$jobid7 8A_ProcessRepeats.sh)
+jobid8B=$(sbatch --parsable --dependency afterok:$jobid7 8B_man_tab_calc.sh)
+
+jobid9=$(sbatch --parsable --dependency afterok:$jobid7 999999999A_RepeatLandscape.sh)
+
+echo "3_simple_repeats $jobid3 
+4_homology $jobid4 
+5_known_denovo $jobid5 
+6_unknown_denovo $jobid6 
+7_rename4_cat1 $jobid7 
+8A_ProcessRepeats $jobid8A 8B_man_tab_calc $jobid8B 
+9_RepeatLandscape $jobid9" > jobid.txt
+
+#AFTER 8B follow 8C commands ## Optional, old
+#AFTER all jobs finished run 9B - there are command line jobs needed
+
+#1_cat_commands $jobid1
+#2_repclassify 9 rounds:$jobid2B extra round:$jobid2C rename & move:$jobid2Z
+
+#If running again using length filtered Repeat Modeler Libraries
+jobid5=$(sbatch --parsable 5B_known_denovo.sh)
+
+jobid6=$(sbatch --parsable --dependency afterok:$jobid5 6B_unknown_denovo.sh)
+
+jobid7=$(sbatch --parsable --dependency afterok:$jobid6 7B_rename4_cat1.sh)
+
+echo " size filtered known and unknown TE library runs
+5B_known_denovo $jobid5
+6B_unknown_denovo $jobid6
+7B_rename4_cat1 $jobid7" >> jobid.txt
+
+# Plot and observe TE lengths
+
+
