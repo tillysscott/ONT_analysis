@@ -39,6 +39,31 @@ kraken2 --db $DBNAME --threads 10 $(cat 390_input_fq.txt)\
         --gzip-compressed
 
 
+##################################################################################################
+# Remove human contamination from 186-T3S2.classified_kraken_out.fq using KrakenTools
+# https://github.com/jenniferlu717/KrakenTools/tree/master
+#################################################################################################
+
+# set up
+#export PATH=$PATH:~/sharedscratch/apps/KrakenTools
+
+# Run extract_kraken_reads.py 
+#python /uoa/home/r01ms21/sharedscratch/apps/KrakenTools/extract_kraken_reads.py \
+	#-k $outdir/$prefix.kraken_out.out \
+	#-s $outdir/$prefix.classified_kraken_out.fq \
+	#-o $outdir/$prefix.classified_nohuman_kraken_out.fa \
+	#--taxid 9606 --exclude --fastq-output
+
+#cat $outdir/$prefix.unclassified_kraken_out.fq $outdir/$prefix.classified_nohuman_kraken_out.fq > $outdir/$prefix.unclassified_classifiednohuman_kraken_out.fq
+
+
+# Run extract_kraken_reads.py
+#python /uoa/home/r01ms21/sharedscratch/apps/KrakenTools/extract_kraken_reads.py \
+#        -k $outdir/$prefix.kraken_out.out \
+#        -s $outdir/$prefix.classified_kraken_out.fq \
+#        -o $outdir/$prefix.classified_human_kraken_out.fq \
+#        --taxid 9606 
+
 
 ######
 # Other options:
