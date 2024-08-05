@@ -25,9 +25,11 @@ export outdir="S_1-e2-A"
 mkdir $outdir
 
 # Assemble raw reads, generating contig layout and edge sequences
-wtdbg2 -x ont -t 10 -i $input -fo $outdir/$prefix -S 1 --edge-min 2 --rescue-low-cov-edges  -A 
+wtdbg2 -x ont -t 10 -i $input -fo $outdir/$prefix -S 1 -A 
+## optimised settings
 
 ## OPTIONS
+### --edge-min 2 --rescue-low-cov-edges
 ### -g genome size
 ### -x sequencing technology
 ### options on github to change for low coverage to optimise
