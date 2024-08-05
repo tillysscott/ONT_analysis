@@ -6,7 +6,7 @@ You will need seqkit, TwoBit and ParseRM installed locally
 Use RepeatModeler2 with the LTRStruct pipeline to generate a de novo TE library for that species  
 _Script is RepeatModeler2.sh_  
 
-## Step 2 - Optional - Combine and reduce redundancy from different species  
+## Step 2 - Optional - Combine and reduce redundancy of TE libraries from different species  
 If you want to mask TE using a TE library from several species, you can do this by adding a species tag to the fasta headers, joining libraries with 'cat' and then join TE families that are the same by using cd-hit  
 _Script is catLib-CDhit.sh_  
 Cd-hit settings are from Goubert et al. 2022 A beginner’s guide to manual curation of transposable elements  
