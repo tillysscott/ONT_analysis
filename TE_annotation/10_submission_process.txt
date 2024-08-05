@@ -21,34 +21,20 @@ jobid7=$(sbatch --parsable --dependency afterok:$jobid6 7_rename4_cat1.sh)
 jobid8A=$(sbatch --parsable --dependency afterok:$jobid7 8_ProcessRepeats.sh)
 #jobid8B=$(sbatch --parsable --dependency afterok:$jobid7 8B_man_tab_calc.sh)
 
-# MANUALLY Run 9_parseRM.sh
 COPY AND PASTE INTO COMMAND LINE:
 echo "3_simple_repeats $jobid3 
 4_homology $jobid4 
 5_known_denovo $jobid5 
 6_unknown_denovo $jobid6 
 7_rename4_cat1 $jobid7 
-8_ProcessRepeats $jobid8A
-9_RepeatLandscape $jobid9" > jobid.txt
+8_ProcessRepeats $jobid8A" >> jobid.txt
 
-#AFTER 8B follow 8C commands ## Optional, old
-#AFTER all jobs finished run 9B - there are command line jobs needed
+
+#AFTER all jobs finished run 9_parseRM.sh - there are command line jobs needed
 
 #1_cat_commands $jobid1
 #2_repclassify 9 rounds:$jobid2B extra round:$jobid2C rename & move:$jobid2Z
 
-#If running again using length filtered Repeat Modeler Libraries
-jobid5=$(sbatch --parsable 5B_known_denovo.sh)
 
-jobid6=$(sbatch --parsable --dependency afterok:$jobid5 6B_unknown_denovo.sh)
-
-jobid7=$(sbatch --parsable --dependency afterok:$jobid6 7B_rename4_cat1.sh)
-
-echo " size filtered known and unknown TE library runs
-5B_known_denovo $jobid5
-6B_unknown_denovo $jobid6
-7B_rename4_cat1 $jobid7" >> jobid.txt
-
-# Plot and observe TE lengths
 
 
