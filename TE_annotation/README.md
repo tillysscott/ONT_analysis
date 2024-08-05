@@ -24,14 +24,15 @@ To calculate the total repeat content you can use _8_ProcessRepeats.sh_ which is
 I prefer to use _9_parseRM.sh_ to calculate the total % of sequence from repeats because there is clear literature and better classification layout. I also generates the data needed to make a RepeatLandscape. It does require a few manual steps to set off though.   
 
 ## Step 5 - Tidy and plot results
-You need to have run ParseRM previously.
-Results are in ``` 07_ParseRM_landscape/$genome.full_mask.align.parseRM.summary.tab ```. Note the #By CLASS section actually refers to TE orders. RepeatMasker doesn't count Mavericks or Cryptons as their own order even though they are. They get included in the DNA order (which should be called TIR). So you'll need to find these in the #By FAMILY section and add them to the TE order section and minus them both from DNA order numbers to get the true TIR order numbers.  
+You need to have run ParseRM previously.  
+Results are in ``` 07_ParseRM_landscape/$genome.full_mask.align.parseRM.summary.tab ```.  
+Note the #By CLASS section actually refers to TE orders. RepeatMasker doesn't count Mavericks or Cryptons as their own order even though they are. They get included in the DNA order (which should be called TIR). So you'll need to find these in the #By FAMILY section and add them to the TE order section and minus them both from DNA order numbers to get the true TIR order numbers.  
 _See example R scripts for plotting results TE_Graphs-LOCIcounts.R and TEfamilies.R_  
   
 Correct TE classification is: Class 1 = LINE, SINE and LTR and Class 2 = TIR, Helitron (also called RC), Maverick and Crypton.
 
 ## Step 6 - Make RepeatLandscape
-You need to have run ParseRM previously.
+You need to have run ParseRM previously.  
 1. Copy the from table from ``` 07_ParseRM_landscape/$genome.full_mask.align.landscape.Div.Rclass.tab ``` into _parseRMbins_template.xlsm Sheet 2
 2. Sometimes the labelling goes skewif, if needed add together any rows that are the same TE type. e.g. LINE+LINE/L1 keeping all columns. Helitrons are also called RC (rolling-circles).
 3. RepeatMasker doesn't count Mavericks or Cryptons as their own order even though they are. They get included in the DNA order (which should be called TIR). So you'll need to add these to your Sheet 2 table and do maths (see 4.). Search for 'Maverick' or 'Crypton' in ``` 07_ParseRM_landscape/$genome.full_mask.align.landscape.Div.Rfam.tab ```. Note that there may be more than one Type of Maverick and that Cryptons are vary rare so there may not be any rows for this. Add these to your initial Sheet 2 table.
