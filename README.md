@@ -2,32 +2,14 @@
 MinION sequencing processing  
 Scripts needed for Sue's methylation analysis  
 
-## Basecall with Guppy, generate statistics plots with Nanoplot:
-1. Call bases from pod5 with Guppy and Nanoplot: guppy_normal.sh
-2. Call modified bases from pod 5 with Guppy and Nanoplot: guppy_methylation.sh  
-  
-INPUTS: ``` pod5 ``` directory  
-OUTPUTS: ``` basecall_guppy/pass ``` OR ``` basecall_guppy_5mC/pass ``` directories with *.fastq.gz files  
-
-## Remove contamination from reads with kraken2
-1. Download standard kraken2 database or use Tilly's: kraken2_buildDB.sh
-2. Find and remove contaminants from reads: kraken2_analysis_reads.sh .  
-  a. Generating the list of sequences can be done in the command line, checked and then hashed out of script  
-  
-INPUTS: list of ``` basecall_guppy/pass/*.fastq.gz ``` files  
-OUTPUTS: ``` *.kraken.report ``` with summary information, and ``` *.unclassified_kraken_out.fq ``` with non-contaminant reads with fastq format, as well as ``` .out ``` file and ``` *.classified_kraken_out.fq ```  
-_also see_ kraken2_analysis_on_sequence.sh for running krarken2_analysis on fasta sequence
-
-## Assemble reads  
-INPUTS: ``` *.unclassified_kraken_out.fq ```  
-Assembly can be done de novo with flye or with _Hirondellea gigas_ PacBio reference with minimap2  
-1. redbean.sh seems to be the best option
-2. minimap2 to map reads to H. gigas reference genome: minimap2.sh
-3. flye to assemble de novo: flye.sh
-  
-OUTPUTS: assembly in fasta format (.fa)  
-  
-## Reduce assembly to haploid with purge_dups
+## Assembly Pipeline
+Run the programmes in Final_MinION_assembly_pipeline  
+1. Basecall with Guppy, do QC (only keep Q-score>9), trim adaptors, make statistics plots with Nanoplot
+2. Remove contamination with kraken2
+3. use wtdbg2 (redbean) to assemble: maps, builds consensus and polish. Best setting will be -S 1 -A --edge-min 2 --rescue-low-cov-edges -R -L 1024 -K 2000 --aln-dovetail -1 -l 500  AND EITHER -k 0 -p 19; -k 0 -p 17; -k 15 -p 0
+4. Remove any persisting adaptors with NCBI-fcs-adaptor
+5. Make sure assembly is haploid with Purge_dups
+6. Check for any persisting contamination with NCBI-fcs-gx  
 
 ## Predict and mask TE
 See TE_annotation/README.md
