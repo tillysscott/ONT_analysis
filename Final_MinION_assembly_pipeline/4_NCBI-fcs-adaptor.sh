@@ -27,7 +27,7 @@ module load fcs
 
 
 # 2 : Screen the genome for adaptors using fcs-adaptor
-run_fcsadaptor.sh --fa-input $genome.fa --output-dir ./$adap_outdir --euk --container-engine singularity --image $FCS_ADAPTOR_IMAGE
+run_fcsadaptor.sh --fasta-input $genome.fa --output-dir ./$adap_outdir --euk --container-engine singularity --image $FCS_ADAPTOR_IMAGE
 
 # 3 : Clean the genome of adaptors using fcs-adaptor
 cat $genome.fa | fcs.py clean genome --action-report ./$adap_outdir/fcs_adaptor_report.txt --output $prefix.clean.fa --contam-fa-out $prefix.contam.fa
