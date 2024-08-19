@@ -29,12 +29,12 @@ mkdir $gx_outdir
 module load fcs
 
 # 4 : Screen the genome for contamination using fcs-gx
-fcs.py screen genome --fa $prefix.clean.fa --out-dir ./$gx_outdir/ --gx-db $GXDB_LOC --tax-id $taxid 
+fcs.py screen genome --fasta $prefix.clean.fa --out-dir ./$gx_outdir/ --gx-db $GXDB_LOC --tax-id $taxid 
 
 # 5 : Clean the genome of contaminants using fcs-gx - Mask contaminants
-cat $prefix.clean.fa | fcs.py clean genome --action-report ./$gx_outdir/$genome.$taxid.fcs_gx_report.txt --output $prefix.gxmasked.clean.fa --contam-fa-out $prefix.gxmasked.contam.fa
+cat $prefix.clean.fa | fcs.py clean genome --action-report ./$gx_outdir/$genome.$taxid.fcs_gx_report.txt --output $prefix.gxmasked.clean.fa --contam-fasta-out $prefix.gxmasked.contam.fa
 
 # 6 : OR Clean the genome of contaminants using fcs-gx - split the assembly at contaminants 
 #sed -i 's/FIX/SPLIT/g' ./$gx_outdir/$genome.$taxid.fcs_gx_report.txt
 
-#cat $prefix.clean.fa | fcs.py clean genome --action-report ./$gx_outdir/$genome.$taxid.fcs_gx_report.txt --output $prefix.gxsplit.clean.fa --contam-fa-out $prefix.gxsplit.contam.fa
+#cat $prefix.clean.fa | fcs.py clean genome --action-report ./$gx_outdir/$genome.$taxid.fcs_gx_report.txt --output $prefix.gxsplit.clean.fa --contam-fasta-out $prefix.gxsplit.contam.fa
