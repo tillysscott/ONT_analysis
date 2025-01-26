@@ -14,7 +14,7 @@ Run the programmes in Final_MinION_assembly_pipeline
 8. Check for any persisting contamination with NCBI-fcs-gx
 9. Calculate assembly and coverage statistics and BUSCO score with BBMap/seqkit, minimap2, samtools and qualimap, and BUSCO arthropoda_10.  
 At the end of this you should have 6 assemblies to choose from: k15, p17 and p17, all with and without polishing.
-This data is low coverage genome skim so aim to maximise BUSCO score, assembly size, N50, percentage of reads mapped, and mininimising mean coverage and standard deviation.
+This data is low coverage genome skim so aim to maximise BUSCO score, assembly size, N50, percentage of reads mapped, and mininise number of contigs, mean coverage and standard deviation.
 
 
 ## Predict and mask TE
