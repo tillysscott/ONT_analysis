@@ -1,0 +1,12 @@
+# go through directories and
+
+cat pass/*.fastq.gz >> central_location/species.fastq.gz
+  # concatenate pass fastq file and put them into one file
+
+module load seqtk 
+seqtk -a central_location/species.fastq.gz > species.fasta
+  # convert fastq to fasta
+
+# this will then be your input for TE_prediction_single.sh
+
+#once you are happy you can remove central_location/species.fastq.gz to save memory
