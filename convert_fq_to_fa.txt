@@ -1,12 +1,13 @@
 # go through directories and
 
-cat pass/*.fastq.gz >> central_location/species.fastq.gz
+# make an sbatch script (give it 50Gb of memory)
+cat experiment1.fastq.gz experiment2.fastq.gz > ~/sharedscratch/TEpipeline/4.*_by_reads/Species/species.fastq.gz
   # concatenate pass fastq file and put them into one file
 
 # once all files are in the central location species.fastq.gz
 
 module load seqtk 
-seqtk -a central_location/species.fastq.gz > species.fasta
+seqtk seq -a central_location/species.fastq.gz > species.fasta
   # convert fastq to fasta
 
 # this will then be your input for TE_prediction_single.sh
