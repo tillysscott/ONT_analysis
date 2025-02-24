@@ -26,17 +26,17 @@ I prefer to use _9_parseRM.sh_ to calculate the total % of sequence from repeats
 ## Step 5 - Tidy and plot results
 You need to have run ParseRM previously.  
 Results are in ``` 07_ParseRM_landscape/$genome.full_mask.align.parseRM.summary.tab ```.  
-Note the #By CLASS section actually refers to TE orders. RepeatMasker doesn't count Mavericks or Cryptons as their own order even though they are. They get included in the DNA order (which should be called TIR). So you'll need to find these in the #By FAMILY section and add them to the TE order section and minus them both from DNA order numbers to get the true TIR order numbers.  
+Note the #By CLASS section actually refers to TE orders. RepeatMasker doesn't count Penelope, DIRS, Mavericks or Cryptons as their own order even though they are. They get included in the DNA order (which should be called TIR). So you'll need to find these in the #By FAMILY section and add them to the TE order section and minus Maverick and Krypton from the  DNA order numbers, and Penelope subtracted from LINE, and DIRS subtracted from LTR to get the true order numbers.  
 _See example R scripts for plotting results TE_Graphs-LOCIcounts.R and TEfamilies.R_  
   
-Correct TE classification is: Class 1 = LINE, SINE and LTR and Class 2 = TIR, Helitron (also called RC), Maverick and Crypton.
+Correct TE classification is: Class 1 = LINE, SINE, Penelope, LTR and DIRS and Class 2 = TIR, Helitron (also called RC), Maverick and Crypton.
 
 ## Step 6 - Make RepeatLandscape
 You need to have run ParseRM previously.  
 1. Copy the from table from ``` 07_ParseRM_landscape/$genome.full_mask.align.landscape.Div.Rclass.tab ``` into _parseRMbins_template.xlsm_ Sheet 2
 2. Sometimes the labelling goes skewif, if needed add together any rows that are the same TE type. e.g. LINE+LINE/L1 keeping all columns. Helitrons are also called RC (rolling-circles).
-3. RepeatMasker doesn't count Mavericks or Cryptons as their own order even though they are. They get included in the DNA order (which should be called TIR). So you'll need to add these to your Sheet 2 table and do maths (see 4.). Search for 'Maverick' or 'Crypton' in ``` 07_ParseRM_landscape/$genome.full_mask.align.landscape.Div.Rfam.tab ```. Note that there may be more than one Type of Maverick and that Cryptons are vary rare so there may not be any rows for this. Add these to your initial Sheet 2 table.
-4. Do maths to sort out your DNA/TIR row. Do =DNA-Maverick-Crypton
+3. RepeatMasker doesn't count Penelope, DIRS, Mavericks or Cryptons as their own order even though they are. They get included in other orders (Penelope-LINE, DIRS-LTR, Maverick and Crypton - DNA, should be called TIR). So you'll need to add these to your Sheet 2 table and do maths (see 4.). Search for ''DIRS' 'Penelope' 'Maverick' or 'Crypton' in ``` 07_ParseRM_landscape/$genome.full_mask.align.landscape.Div.Rfam.tab ```. Note that there may be more than one Type of each and that Cryptons are vary rare so there may not be any rows for this. Add these to your initial Sheet 2 table.
+4. Do maths to sort out your DNA/TIR row. Do ``` =DNA-Maverick-Crypton =LINE-Penelope =LTR-DIRS ```
 5. Copy and paste the rows into the correct row in Sheet 1, cell E4 onwards
 6. Run macros TransposeRow1 : DeleteOriginalTable for the sheet. Got to 'Developer' tab, press 'Macros', single click onto TrasposeRow1, press run. Repeat for TransposeRow2 up, then use DeleteOriginalTable.
 7. Delete Sheet 2
