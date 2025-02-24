@@ -3,6 +3,8 @@
 cat pass/*.fastq.gz >> central_location/species.fastq.gz
   # concatenate pass fastq file and put them into one file
 
+# once all files are in the central location species.fastq.gz
+
 module load seqtk 
 seqtk -a central_location/species.fastq.gz > species.fasta
   # convert fastq to fasta
