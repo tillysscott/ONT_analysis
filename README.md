@@ -21,4 +21,5 @@ This data is low coverage genome skim so aim to maximise BUSCO score, assembly s
 See TE_annotation/README.md
 
 ## Sue has predicted methylated Cpg sites:  
-To calculate the percentage of CpG sites that are methylated in the assembly, see 5mCpG_calculations.sh
+To calculate the percentage of CpG sites that are methylated in the assembly, see 5mCpG_calculations.sh  
+To analyse methylated CpG in TE use scripts in ONT_CpG
